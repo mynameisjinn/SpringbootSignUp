@@ -1,7 +1,6 @@
 package com.study.springboothyejin.web.exception;
 
 import lombok.Getter;
-
 import java.util.Map;
 
 public class CustomDuplicateUsernameException extends RuntimeException {

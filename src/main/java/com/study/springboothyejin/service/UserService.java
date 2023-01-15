@@ -28,6 +28,7 @@ public class UserService {
         return userDto;
     }
 
+
     public void duplicateUsername(String username) {
         UserDto userDto = userRepository.findUserByUsername(username);
         if(userDto != null) {

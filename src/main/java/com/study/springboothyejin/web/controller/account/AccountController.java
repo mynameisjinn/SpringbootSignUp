@@ -10,5 +10,4 @@ public class AccountController {
     public String loadRegister() {
         return "account/register";
     }
-
 }

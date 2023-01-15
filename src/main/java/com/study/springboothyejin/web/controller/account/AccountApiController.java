@@ -30,5 +30,4 @@ public class AccountApiController {
                 .created(URI.create("/account/login"))
                 .body(new CMRespDto<>("회원가입 완료", null));
     }
-
 }

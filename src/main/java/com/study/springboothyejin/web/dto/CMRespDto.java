@@ -3,7 +3,6 @@ package com.study.springboothyejin.web.dto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-
 @Builder
 @AllArgsConstructor
 @Data
