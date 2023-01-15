@@ -10,5 +10,10 @@ public class AccountController {
     public String loadRegister() {
         return "account/register";
     }
+
+    @GetMapping("/account/test")
+    public String Testr() {
+        return "account/functionTest";
+    }
 }
 

@@ -3,6 +3,8 @@ package com.study.springboothyejin.web.controller.account;
 import com.study.springboothyejin.service.UserService;
 import com.study.springboothyejin.web.dto.CMRespDto;
 import com.study.springboothyejin.web.dto.UserDto;
+import com.study.springboothyejin.web.dto.UsernameDto;
+import com.study.springboothyejin.web.exception.CustomValidException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -17,17 +19,26 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-//@Validated
 @RequestMapping("/api/account")
 public class AccountApiController {
     @Autowired
     private UserService userService;
 
     @GetMapping("/username")
-    public ResponseEntity<?> duplicateUsername(@Pattern(regexp = "^[a-zA-Z\\d]{5,20}$"
-            ,message = "사용자 이름은 영문, 숫자조합이어야하며 <br>5자 이상 20자 이하로 작성하세요") String username) {
-//        System.out.println(username);
-        userService.duplicateUsername(username);
+    public ResponseEntity<?> duplicateUsername(@Valid UsernameDto usernameDto,
+                                               BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            Map<String,String> errorMap = new HashMap<String,String>();
+            bindingResult.getFieldErrors().forEach(error -> {
+                errorMap.put(error.getField(), error.getDefaultMessage());
+            });
+            errorMap.forEach((k, v) ->{
+                System.out.println(k+" : "+v);
+            });
+
+            throw new CustomValidException(errorMap);
+        }
+        userService.duplicateUsername(usernameDto.getUsername());
         return ResponseEntity.ok().body(new CMRespDto<>("가입 가능한 사용자이름", true));
     }
 
@@ -44,6 +55,7 @@ public class AccountApiController {
             errorMap.forEach((k, v) ->{
                 System.out.println(k+" : "+v);
             });
+            throw new CustomValidException(errorMap);
         }
         return ResponseEntity
                 .created(URI.create("/account/login"))
