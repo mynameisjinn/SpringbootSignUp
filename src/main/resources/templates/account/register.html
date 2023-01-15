@@ -155,7 +155,7 @@
                     error: (errorResponse) => {
                         console.log(errorResponse);
                         usernameInput.classList.remove("success");
-                        usernameError.textContent = errorResponse.responseJSON.data.duplicate;
+                        usernameError.textContent = errorResponse.responseJSON.data.username;
                     }
                 });
             }
