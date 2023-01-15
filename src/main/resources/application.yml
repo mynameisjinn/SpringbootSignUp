@@ -8,7 +8,6 @@ spring:
     username: root
     password: 1111
 
-
 mybatis:
   mapper-locations:
     - /mappers/*.xml

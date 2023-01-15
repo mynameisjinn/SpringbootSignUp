@@ -14,4 +14,3 @@ public class AccountApiControllerAdvice {
         return  ResponseEntity.badRequest().body(new CMRespDto<>(e.getMessage(), e.getErrorMap()));
     }
 }
-
